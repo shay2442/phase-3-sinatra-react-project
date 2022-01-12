@@ -13,24 +13,14 @@ class ApplicationController < Sinatra::Base
 end
 
   post "/recipes" do 
-  recipe = Recipe.create(title: params[:title], from: params[:from], category: params[:category], notes: params[:notes], user_id: params[:user_id])
-  recipes.to_json
+    recipe = Recipe.create(title: params[:title], from: params[:from], category: params[:category], notes: params[:notes], user_id: params[:user_id])
+    recipe.to_json
   end
 
-  # delete "/recipes/:id" do
-  #   recipe = Recipe.find(params[:id])
-  #   recipe.destroy
-  #   recipe.to_json
-  # end
-
-  delete "recipes/:id" do
-    find_recipe
-    if @recipe
-      @recipe.destroy
-      @recipe.to_json
-    else 
-      { errors: ["Blog does not exist"]}.to_json
-    end
-  end 
+  delete "/recipes/:id" do
+    recipe = Recipe.find(params[:id])
+    recipe.destroy
+    recipe.to_json
+  end
 
 end
